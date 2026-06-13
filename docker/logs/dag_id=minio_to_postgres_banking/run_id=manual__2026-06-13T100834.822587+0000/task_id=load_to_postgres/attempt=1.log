@@ -1,0 +1,71 @@
+[2026-06-13T10:11:55.164+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-06-13T10:11:55.294+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: minio_to_postgres_banking.load_to_postgres manual__2026-06-13T10:08:34.822587+00:00 [queued]>
+[2026-06-13T10:11:55.357+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: minio_to_postgres_banking.load_to_postgres manual__2026-06-13T10:08:34.822587+00:00 [queued]>
+[2026-06-13T10:11:55.361+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-06-13T10:11:55.446+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_to_postgres> on 2026-06-13 10:08:34.822587+00:00
+[2026-06-13T10:11:55.488+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'minio_to_postgres_banking', 'load_to_postgres', 'manual__2026-06-13T10:08:34.822587+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/minio_to_postgres_dag.py', '--cfg-path', '/tmp/tmpgjkbzsrz']
+[2026-06-13T10:11:55.501+0000] {standard_task_runner.py:91} INFO - Job 27: Subtask load_to_postgres
+[2026-06-13T10:11:55.508+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=3696) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-06-13T10:11:55.512+0000] {standard_task_runner.py:64} INFO - Started process 3708 to run task
+[2026-06-13T10:11:55.822+0000] {task_command.py:426} INFO - Running <TaskInstance: minio_to_postgres_banking.load_to_postgres manual__2026-06-13T10:08:34.822587+00:00 [running]> on host 078469dc5c2b
+[2026-06-13T10:11:56.648+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='minio_to_postgres_banking' AIRFLOW_CTX_TASK_ID='load_to_postgres' AIRFLOW_CTX_EXECUTION_DATE='2026-06-13T10:08:34.822587+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-13T10:08:34.822587+00:00'
+[2026-06-13T10:11:56.671+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-06-13T10:11:57.955+0000] {logging_mixin.py:188} INFO - Truncated raw.customers before fresh load
+[2026-06-13T10:11:58.065+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/customers_132133561106.parquet -> raw.customers
+[2026-06-13T10:11:58.203+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/customers_132134017194.parquet -> raw.customers
+[2026-06-13T10:11:58.386+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/customers_132134766362.parquet -> raw.customers
+[2026-06-13T10:11:58.521+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/customers_132135123993.parquet -> raw.customers
+[2026-06-13T10:11:58.664+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/customers_132135471539.parquet -> raw.customers
+[2026-06-13T10:11:58.807+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/customers_132135807895.parquet -> raw.customers
+[2026-06-13T10:11:58.996+0000] {logging_mixin.py:188} INFO - Truncated raw.accounts before fresh load
+[2026-06-13T10:11:59.139+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132129584314.parquet -> raw.accounts
+[2026-06-13T10:11:59.327+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132130077016.parquet -> raw.accounts
+[2026-06-13T10:11:59.467+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132130403945.parquet -> raw.accounts
+[2026-06-13T10:11:59.618+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132132288044.parquet -> raw.accounts
+[2026-06-13T10:11:59.800+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132132738319.parquet -> raw.accounts
+[2026-06-13T10:11:59.948+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132133112946.parquet -> raw.accounts
+[2026-06-13T10:12:00.102+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132142986055.parquet -> raw.accounts
+[2026-06-13T10:12:00.204+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132143296757.parquet -> raw.accounts
+[2026-06-13T10:12:00.307+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132143605257.parquet -> raw.accounts
+[2026-06-13T10:12:00.458+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132144143773.parquet -> raw.accounts
+[2026-06-13T10:12:00.567+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132145098571.parquet -> raw.accounts
+[2026-06-13T10:12:00.685+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/accounts_132145308286.parquet -> raw.accounts
+[2026-06-13T10:12:00.816+0000] {logging_mixin.py:188} INFO - Truncated raw.transactions before fresh load
+[2026-06-13T10:12:00.933+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132127164202.parquet -> raw.transactions
+[2026-06-13T10:12:01.048+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132127481561.parquet -> raw.transactions
+[2026-06-13T10:12:01.152+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132127793020.parquet -> raw.transactions
+[2026-06-13T10:12:01.238+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132128111389.parquet -> raw.transactions
+[2026-06-13T10:12:01.331+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132128431342.parquet -> raw.transactions
+[2026-06-13T10:12:01.432+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132128783961.parquet -> raw.transactions
+[2026-06-13T10:12:01.592+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132137133056.parquet -> raw.transactions
+[2026-06-13T10:12:01.836+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132137430269.parquet -> raw.transactions
+[2026-06-13T10:12:02.030+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132137726908.parquet -> raw.transactions
+[2026-06-13T10:12:02.538+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132138096876.parquet -> raw.transactions
+[2026-06-13T10:12:02.816+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132138484843.parquet -> raw.transactions
+[2026-06-13T10:12:03.053+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132138787501.parquet -> raw.transactions
+[2026-06-13T10:12:03.228+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132140682554.parquet -> raw.transactions
+[2026-06-13T10:12:03.360+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132140999700.parquet -> raw.transactions
+[2026-06-13T10:12:03.518+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132141255962.parquet -> raw.transactions
+[2026-06-13T10:12:03.678+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132141615408.parquet -> raw.transactions
+[2026-06-13T10:12:03.860+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132141910083.parquet -> raw.transactions
+[2026-06-13T10:12:04.011+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132142241608.parquet -> raw.transactions
+[2026-06-13T10:12:04.166+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132142564428.parquet -> raw.transactions
+[2026-06-13T10:12:04.285+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132146499709.parquet -> raw.transactions
+[2026-06-13T10:12:04.459+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132146863520.parquet -> raw.transactions
+[2026-06-13T10:12:04.620+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132147124640.parquet -> raw.transactions
+[2026-06-13T10:12:04.736+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132147514004.parquet -> raw.transactions
+[2026-06-13T10:12:04.868+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132147793433.parquet -> raw.transactions
+[2026-06-13T10:12:04.985+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132148151224.parquet -> raw.transactions
+[2026-06-13T10:12:05.117+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132149488080.parquet -> raw.transactions
+[2026-06-13T10:12:05.286+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132149751796.parquet -> raw.transactions
+[2026-06-13T10:12:05.438+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132149973427.parquet -> raw.transactions
+[2026-06-13T10:12:05.593+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132150257711.parquet -> raw.transactions
+[2026-06-13T10:12:05.706+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132150499808.parquet -> raw.transactions
+[2026-06-13T10:12:05.841+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132150756291.parquet -> raw.transactions
+[2026-06-13T10:12:05.960+0000] {logging_mixin.py:188} INFO - Loaded /tmp/minio_downloads/transactions_132151032784.parquet -> raw.transactions
+[2026-06-13T10:12:05.962+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-06-13T10:12:05.964+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-06-13T10:12:06.059+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=minio_to_postgres_banking, task_id=load_to_postgres, run_id=manual__2026-06-13T10:08:34.822587+00:00, execution_date=20260613T100834, start_date=20260613T101155, end_date=20260613T101206
+[2026-06-13T10:12:06.224+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-06-13T10:12:06.328+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-06-13T10:12:06.397+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

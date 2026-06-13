@@ -1,0 +1,21 @@
+banking_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost      # for running dbt locally from PowerShell
+      port: 5432
+      user: postgres
+      password: postgres
+      dbname: banking
+      schema: cleaned
+      threads: 1
+    docker:
+      type: postgres
+      host: postgres       # for running dbt inside Airflow container
+      port: 5432
+      user: postgres
+      password: postgres
+      dbname: banking
+      schema: cleaned
+      threads: 1
