@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Cleaned and deduplicated customer records from the raw layer.
+    columns:
+      - name: customer_id
+        description: Unique identifier for a customer.
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: Customer email address.
+        tests:
+          - not_null
+      - name: created_at
+        description: Timestamp the customer record was created.
+        tests:
+          - not_null
+
+  - name: stg_accounts
+    description: Cleaned and deduplicated account records from the raw layer.
+    columns:
+      - name: account_id
+        description: Unique identifier for an account.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Foreign key to the owning customer.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: balance
+        description: Current account balance.
+        tests:
+          - not_null
+
+  - name: stg_transactions
+    description: Cleaned transaction records from the raw layer.
+    columns:
+      - name: transaction_id
+        description: Unique identifier for a transaction.
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: Foreign key to the account the transaction belongs to.
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: amount
+        description: Transaction amount.
+        tests:
+          - not_null

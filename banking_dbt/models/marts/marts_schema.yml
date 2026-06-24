@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: Customer dimension with SCD Type 2 history flags.
+    columns:
+      - name: customer_id
+        description: Unique identifier for a customer (not unique across history rows).
+        tests:
+          - not_null
+      - name: is_current
+        description: Flag indicating whether this row is the current version (1) or historical (0).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: dim_accounts
+    description: Account dimension with SCD Type 2 history flags.
+    columns:
+      - name: account_id
+        description: Unique identifier for an account (not unique across history rows).
+        tests:
+          - not_null
+      - name: is_current
+        description: Flag indicating whether this row is the current version (1) or historical (0).
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+
+  - name: fact_transactions
+    description: Transaction fact table, incrementally loaded.
+    columns:
+      - name: transaction_id
+        description: Unique identifier for a transaction.
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: Foreign key to the account dimension.
+        tests:
+          - not_null
+      - name: amount
+        description: Transaction amount.
+        tests:
+          - not_null

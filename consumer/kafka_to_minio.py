@@ -4,6 +4,9 @@ import json
 import pandas as pd
 from datetime import datetime
 import os
+import time
+import signal
+import sys
 from dotenv import load_dotenv
 
 # -----------------------------
@@ -20,7 +23,8 @@ consumer = KafkaConsumer(
     auto_offset_reset='earliest',
     enable_auto_commit=True,
     group_id=os.getenv("KAFKA_GROUP"),
-    value_deserializer=lambda x: json.loads(x.decode('utf-8'))
+    value_deserializer=lambda x: json.loads(x.decode('utf-8')),
+    consumer_timeout_ms=5000  # stop blocking after 5s of no new messages, so we can check the flush timer
 )
 
 # MinIO client
@@ -52,24 +56,66 @@ def write_to_minio(table_name, records):
 
 # Batch consume
 batch_size = 50
+flush_interval_seconds = 10  # flush whatever is buffered at least this often
+
 buffer = {
     'banking_server.public.customers': [],
     'banking_server.public.accounts': [],
     'banking_server.public.transactions': []
 }
 
+last_flush_time = time.time()
+
+
+def flush_all(reason="periodic"):
+    """Flush any non-empty buffers, regardless of size."""
+    for topic, records in buffer.items():
+        if records:
+            print(f"⏳ Flushing {len(records)} buffered records for {topic} ({reason})")
+            write_to_minio(topic.split('.')[-1], records)
+            buffer[topic] = []
+
+
+def handle_shutdown(signum, frame):
+    """Catch Ctrl+C / termination and flush before exiting."""
+    print("\n🛑 Shutdown signal received. Flushing remaining buffers before exit...")
+    flush_all(reason="shutdown")
+    consumer.close()
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, handle_shutdown)
+signal.signal(signal.SIGTERM, handle_shutdown)
+
 print("✅ Connected to Kafka. Listening for messages...")
 
-for message in consumer:
-    topic = message.topic
-    event = message.value
-    payload = event.get("payload", {})
-    record = payload.get("after")  # Only take the actual row
+while True:
+    try:
+        for message in consumer:
+            topic = message.topic
+            event = message.value
+            payload = event.get("payload", {})
+            record = payload.get("after")  # Only take the actual row
 
-    if record:
-        buffer[topic].append(record)
-        print(f"[{topic}] -> {record}")  # Debugging
+            if record:
+                buffer[topic].append(record)
+                print(f"[{topic}] -> {record}")  # Debugging
 
-    if len(buffer[topic]) >= batch_size:
-        write_to_minio(topic.split('.')[-1], buffer[topic])
-        buffer[topic] = []
+            if len(buffer[topic]) >= batch_size:
+                write_to_minio(topic.split('.')[-1], buffer[topic])
+                buffer[topic] = []
+                last_flush_time = time.time()
+
+            # Time-based flush check even while messages are actively arriving
+            if time.time() - last_flush_time >= flush_interval_seconds:
+                flush_all(reason="time interval reached")
+                last_flush_time = time.time()
+
+        # consumer_timeout_ms triggers StopIteration after 5s of silence
+        # this is where we land if no new messages arrived — check the timer here too
+        if time.time() - last_flush_time >= flush_interval_seconds:
+            flush_all(reason="idle timeout reached")
+            last_flush_time = time.time()
+
+    except KeyboardInterrupt:
+        handle_shutdown(None, None)

@@ -1,0 +1,77 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]   # deploy only from main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ------------------------
+      # Checkout repo
+      # ------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ------------------------
+      # Python setup
+      # ------------------------
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      # ------------------------
+      # Install dbt
+      # ------------------------
+      - name: Install dbt Postgres adapter
+        run: |
+          python -m pip install --upgrade pip
+          pip install dbt-postgres
+
+      # ------------------------
+      # Configure dbt profile
+      # ------------------------
+      - name: Setup dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<EOL
+          banking_dbt:
+            target: prod
+            outputs:
+              prod:
+                type: postgres
+                host: ${{ secrets.POSTGRES_HOST }}
+                port: 6543
+                user: ${{ secrets.POSTGRES_USER }}
+                password: ${{ secrets.POSTGRES_PASSWORD }}
+                dbname: postgres
+                schema: business_ready
+                threads: 1
+          EOL
+
+      # ------------------------
+      # Deploy dbt project — staged, matching local validation
+      # ------------------------
+      - name: dbt run staging models
+        run: |
+          cd banking_dbt
+          dbt deps
+          dbt run --select staging --target prod  # builds production models on Postgres
+
+      - name: dbt snapshot (SCD2)
+        run: |
+          cd banking_dbt
+          dbt snapshot --target prod
+
+      - name: dbt run marts models
+        run: |
+          cd banking_dbt
+          dbt run --select marts --target prod
+
+      - name: dbt test (prod)
+        run: |
+          cd banking_dbt
+          dbt test --target prod   # validates production data
