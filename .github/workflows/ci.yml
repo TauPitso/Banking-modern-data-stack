@@ -37,7 +37,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install dbt-postgres
+          pip install dbt-core==1.11.11 dbt-postgres==1.10.0
 
       - name: Run linters
         run: |
@@ -60,8 +60,8 @@ jobs:
                 type: postgres
                 host: localhost
                 port: 5432
-                user: ${{ secrets.POSTGRES_USER }}
-                password: ${{ secrets.POSTGRES_PASSWORD }}
+                user: ci_test_user
+                password: ci_test_password
                 dbname: banking
                 schema: cleaned
                 threads: 1
