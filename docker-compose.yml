@@ -149,6 +149,8 @@ services:
 volumes:
   airflow_postgres_data:
 
-networks:
-  default:
-    name: banking-mds-net
+# networks:
+#   default:
+#     name: banking-mds-net
+
+  

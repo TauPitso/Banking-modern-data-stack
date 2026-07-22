@@ -24,6 +24,7 @@ connector_config = {
         "table.include.list": "public.customers,public.accounts,public.transactions",
         "plugin.name": "pgoutput",
         "slot.name": "banking_slot",
+        "snapshot.mode": "never",
         "publication.autocreate.mode": "filtered",
         "tombstones.on.delete": "false",
         "decimal.handling.mode": "double",

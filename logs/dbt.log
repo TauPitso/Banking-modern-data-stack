@@ -109,3 +109,61 @@ https://docs.getdbt.com/docs/configure-your-profile
 [0m14:38:44.388964 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002134F54DC50>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000213507F4910>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000213507F59D0>]}
 [0m14:38:44.390969 [debug] [MainThread]: Flushing usage events
 [0m14:38:45.543869 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m11:27:37.656730 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DE7B58190>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DE7B4D590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DE7B4F110>]}
+
+
+============================== 11:27:37.677056 | 866086b6-8585-4307-82ae-2521673ab066 ==============================
+[0m11:27:37.677056 [info ] [MainThread]: Running with dbt=1.11.11
+[0m11:27:37.679076 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'None', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'profiles_dir': 'C:\\Users\\Test\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'use_colors': 'True', 'invocation_command': 'dbt debug --target prod', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m11:27:37.838932 [info ] [MainThread]: dbt version: 1.11.11
+[0m11:27:37.842956 [info ] [MainThread]: python version: 3.11.4
+[0m11:27:37.847135 [info ] [MainThread]: python path: C:\Users\Test\AppData\Local\Programs\Python\Python311\python.exe
+[0m11:27:37.850936 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m11:27:38.871041 [info ] [MainThread]: Using profiles dir at C:\Users\Test\.dbt
+[0m11:27:38.876463 [info ] [MainThread]: Using profiles.yml file at C:\Users\Test\.dbt\profiles.yml
+[0m11:27:38.880448 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\Test\Documents\Tau Learns\End-to-End Banking Data Engineering Project  Snowflake, DBT and Airflow\banking-modern-datastack\dbt_project.yml
+[0m11:27:38.889138 [info ] [MainThread]: adapter type: postgres
+[0m11:27:38.891898 [info ] [MainThread]: adapter version: 1.10.0
+[0m11:27:38.894922 [info ] [MainThread]: Configuration:
+[0m11:27:38.896928 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m11:27:38.903517 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m11:27:38.906250 [info ] [MainThread]: Required dependencies:
+[0m11:27:38.912320 [debug] [MainThread]: Executing "git --help"
+[0m11:27:39.152224 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]\n           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]\n           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone      Clone a repository into a new directory\n   init       Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add        Add file contents to the index\n   mv         Move or rename a file, a directory, or a symlink\n   restore    Restore working tree files\n   rm         Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect     Use binary search to find the commit that introduced a bug\n   diff       Show changes between commits, commit and working tree, etc\n   grep       Print lines matching a pattern\n   log        Show commit logs\n   show       Show various types of objects\n   status     Show the working tree status\n\ngrow, mark and tweak your common history\n   backfill   Download missing objects in a partial clone\n   branch     List, create, or delete branches\n   commit     Record changes to the repository\n   history    EXPERIMENTAL: Rewrite history\n   merge      Join two or more development histories together\n   rebase     Reapply commits on top of another base tip\n   reset      Set `HEAD` or the index to a known state\n   switch     Switch branches\n   tag        Create, list, delete or verify tags\n\ncollaborate (see also: git help workflows)\n   fetch      Download objects and refs from another repository\n   pull       Fetch from and integrate with another repository or a local branch\n   push       Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m11:27:39.155826 [debug] [MainThread]: STDERR: "b''"
+[0m11:27:39.162492 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m11:27:39.167949 [info ] [MainThread]: Connection:
+[0m11:27:39.172338 [info ] [MainThread]:   host: aws-1-eu-north-1.pooler.supabase.com
+[0m11:27:39.179441 [info ] [MainThread]:   port: 6543
+[0m11:27:39.186942 [info ] [MainThread]:   user: postgres.ijszajblnmyhddxopgqs
+[0m11:27:39.191432 [info ] [MainThread]:   database: postgres
+[0m11:27:39.199068 [info ] [MainThread]:   schema: business_ready
+[0m11:27:39.203242 [info ] [MainThread]:   connect_timeout: 10
+[0m11:27:39.210360 [info ] [MainThread]:   role: None
+[0m11:27:39.230617 [info ] [MainThread]:   search_path: None
+[0m11:27:39.247345 [info ] [MainThread]:   keepalives_idle: 0
+[0m11:27:39.275113 [info ] [MainThread]:   sslmode: None
+[0m11:27:39.282098 [info ] [MainThread]:   sslcert: None
+[0m11:27:39.294142 [info ] [MainThread]:   sslkey: None
+[0m11:27:39.300611 [info ] [MainThread]:   sslrootcert: None
+[0m11:27:39.327950 [info ] [MainThread]:   application_name: dbt
+[0m11:27:39.335956 [info ] [MainThread]:   retries: 1
+[0m11:27:39.347488 [info ] [MainThread]: Registered adapter: postgres=1.10.0
+[0m11:27:41.173980 [debug] [MainThread]: Acquiring new postgres connection 'debug'
+[0m11:27:51.836206 [debug] [MainThread]: Using postgres connection "debug"
+[0m11:27:51.839225 [debug] [MainThread]: On debug: select 1 as id
+[0m11:27:51.844144 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m11:27:53.859470 [debug] [MainThread]: SQL status: SELECT 1 in 2.015 seconds
+[0m11:27:53.863948 [debug] [MainThread]: On debug: Close
+[0m11:27:53.868975 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m11:27:53.871075 [info ] [MainThread]: [31m1 check failed:[0m
+[0m11:27:53.881869 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <C:\Users\Test\Documents\Tau Learns\End-to-End Banking Data Engineering Project  Snowflake, DBT and Airflow\banking-modern-datastack\dbt_project.yml> not found
+
+[0m11:27:53.894905 [debug] [MainThread]: Command `dbt debug` failed at 11:27:53.893905 after 16.84 seconds
+[0m11:27:53.899177 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m11:27:53.904019 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DE0DEB3D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DE8B8ECD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000024DE0DAA690>]}
+[0m11:27:53.908035 [debug] [MainThread]: Flushing usage events
+[0m11:27:55.292387 [debug] [MainThread]: An error was encountered while trying to flush usage events
