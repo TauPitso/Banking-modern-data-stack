@@ -1,10 +1,11 @@
 import os
+from datetime import UTC, datetime, timedelta
+
 import boto3
-import psycopg2
 import pandas as pd
+import psycopg2
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -41,7 +42,7 @@ def download_from_minio():
         aws_secret_access_key=MINIO_SECRET_KEY,
     )
 
-    cutoff = datetime.now(timezone.utc) - timedelta(minutes=LOOKBACK_MINUTES)
+    cutoff = datetime.now(UTC) - timedelta(minutes=LOOKBACK_MINUTES)
     local_files = {}
 
     for table in TABLES:
