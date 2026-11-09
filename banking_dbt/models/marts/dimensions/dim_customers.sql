@@ -15,4 +15,5 @@ with latest as (
         end                 as is_current
     from {{ ref('customers_snapshot') }}
 )
-select * from latest
+select * from latest 
+where is_current = 1

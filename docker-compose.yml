@@ -7,6 +7,9 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
+    volumes:
+      - zookeeper_data:/var/lib/zookeeper/data
+      - zookeeper_log:/var/lib/zookeeper/log
 
   kafka:
     image: confluentinc/cp-kafka:7.4.1
@@ -26,6 +29,8 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+    volumes:
+      - kafka_data:/var/lib/kafka/data
 
   connect:
     image: debezium/connect:2.2
@@ -45,6 +50,27 @@ services:
       VALUE_CONVERTER_SCHEMAS_ENABLE: 'false'
       KEY_CONVERTER: 'org.apache.kafka.connect.json.JsonConverter'
       VALUE_CONVERTER: 'org.apache.kafka.connect.json.JsonConverter'
+
+  connector-register:
+    build:
+      context: ./kafka-debezium
+    container_name: connector-register
+    depends_on:
+      - connect
+    env_file:
+      - .env
+    restart: "no"
+  
+  kafka-consumer:
+    build:
+      context: ./consumer
+    container_name: kafka-consumer
+    depends_on:
+      - connector-register
+      - minio
+    env_file:
+      - ./consumer/.env
+    restart: unless-stopped
 
   postgres:
     image: postgres:15
@@ -148,6 +174,10 @@ services:
 
 volumes:
   airflow_postgres_data:
+  zookeeper_data:
+  zookeeper_log:
+  kafka_data:
+
 
 # networks:
 #   default:

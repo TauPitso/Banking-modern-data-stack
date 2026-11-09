@@ -14,6 +14,28 @@ from dotenv import load_dotenv
 # -----------------------------
 load_dotenv()
 
+import socket
+
+# Wait for Kafka to be reachable before connecting
+kafka_host = "kafka"
+kafka_port = 9092
+MAX_RETRIES = 30
+WAIT_SECONDS = 10
+
+print("⏳ Waiting for Kafka to be reachable...")
+for attempt in range(1, MAX_RETRIES + 1):
+    try:
+        sock = socket.create_connection((kafka_host, kafka_port), timeout=5)
+        sock.close()
+        print(f"✅ Kafka is reachable (attempt {attempt}).")
+        break
+    except OSError:
+        print(f"⏳ Kafka not ready yet... ({attempt}/{MAX_RETRIES})")
+        time.sleep(WAIT_SECONDS)
+else:
+    print("❌ Kafka never became reachable. Exiting.")
+    sys.exit(1)
+
 # Kafka consumer settings
 consumer = KafkaConsumer(
     'banking_server.public.customers',

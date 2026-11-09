@@ -9,7 +9,8 @@ select
     t.status,
     t.transaction_type,
     t.transaction_time,
-    current_timestamp       as load_timestamp
+    current_timestamp       as load_timestamp,
+    CAST(current_timestamp AS DATE) AS snapshot_date
 from {{ ref('stg_transactions') }} t
 left join {{ ref('stg_accounts') }} a
     on t.account_id = a.account_id
