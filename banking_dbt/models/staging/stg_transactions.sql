@@ -8,5 +8,5 @@ select
     related_account_id::text    as related_account_id,
     status::text                as status,
     created_at::timestamp       as transaction_time,
-    current_timestamp           as load_timestamp,
+    current_timestamp           as load_timestamp
 from {{ source('raw', 'transactions') }}
